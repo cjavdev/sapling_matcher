@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap";
+
+.huge {
+  font-size: 2em;
+  height: 2em;
+}
