@@ -107,4 +107,9 @@ RSpec.describe LinkedinProfile, :type => :model do
       end
     end
   end
+
+  it '#name is the first and last' do
+    profile = create(:linkedin_profile)
+    expect(profile.name).to eq("first last")
+  end
 end

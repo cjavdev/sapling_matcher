@@ -36,6 +36,10 @@ class LinkedinProfile < ActiveRecord::Base
     profile
   end
 
+  def name
+    "#{ first_name } #{ last_name }"
+  end
+
   def fetch
     set_fields
     set_schools

@@ -25,7 +25,10 @@ class LinkedinProfilesController < ApplicationController
   end
 
   def create
-    @profile = LinkedinProfile.build_from_link(params[:link], params[:client_type])
+    @profile = LinkedinProfile.build_from_link(
+      params[:link],
+      params[:client_type]
+    )
 
     if @profile.save
       redirect_to @profile

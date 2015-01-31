@@ -1,3 +1,18 @@
-<h1><%= @profile.first_name %></h1>
 
-<p><%= @profile.summary %></p>
+<div class="row">
+  <div class="col-md-6">
+    <h1><%= @profile.name %></h1>
+    <p><%= @profile.summary %></p>
+    <ul class="schools list-group">
+      <% @profile.schools.each do |school| %>
+        <li class="list-group-item">
+          <strong><%= school.name %></strong>
+          <small class="pull-right"><%= school.period %></small>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <h2>Matches</h2>
+  </div>
+</div>
