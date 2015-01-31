@@ -2,25 +2,42 @@
 
 <div class="row">
   <div class="col-md-6">
-    <div class="form-group">
-      <input
-      type="text"
-      class="form-control huge"
-      placeholder="https://www.linkedin.com/pub..." />
-    </div>
+    <h2>Add Profile</h2>
+    <form action="/linkedin_profiles" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+      <div class="form-group">
+        <input
+        type="text"
+        class="form-control huge"
+        name="link"
+        placeholder="https://www.linkedin.com/pub..." />
+      </div>
 
-    <div class="form-group">
-      <button class="btn btn-lg btn-success">Match</button>
-    </div>
+      <div class="form-group">
+        <label>
+          Advisor
+          <input type="radio" name="client_type" value="Advisor" checked/>
+        </label>
+        <label>
+          Potential Client
+          <input type="radio" name="client_type" value="PotentialClient" />
+        </label>
+      </div>
+
+      <div class="form-group">
+        <button class="btn btn-lg btn-success">Match</button>
+      </div>
+    </form>
   </div>
 
   <div class="col-md-6">
-    Advisors
+    <h2>Advisors</h2>
     <div class="list-group">
-      <% @advisors.each do |advisor| %>
-      <div class="list-group-item">
-        <%= advisor.name %>
-      </div>
+      <% @profiles.each do |person| %>
+        <div class="list-group-item">
+          <%= person.first_name %>
+          <span class="badge"><%= person.client_type %></span>
+        </div>
       <% end %>
     </div>
   </div>

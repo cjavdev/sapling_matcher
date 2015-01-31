@@ -21,6 +21,8 @@
 #
 
 class LinkedinProfile < ActiveRecord::Base
+  validates :link, uniqueness: true
+  validates :client_type, inclusion: { in: ["Advisor", "PotentialClient"] }
   has_many :schools
   has_many :websites
   has_many :companies
@@ -28,8 +30,8 @@ class LinkedinProfile < ActiveRecord::Base
   accepts_nested_attributes_for :companies
   accepts_nested_attributes_for :websites
 
-  def self.build_from_link(link)
-    profile = LinkedinProfile.new(link: link)
+  def self.build_from_link(link, client_type)
+    profile = LinkedinProfile.new(link: link, client_type: client_type)
     profile.fetch
     profile
   end

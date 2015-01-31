@@ -25,6 +25,8 @@ require 'rails_helper'
 vcr_options = { cassette_name: 'linkedin-profiles', record: :new_episodes }
 
 RSpec.describe LinkedinProfile, :type => :model do
+  it { should validate_uniqueness_of(:link) }
+  it { should validate_inclusion_of(:client_type).in_array(%w(Advisor PotentialClient)) }
   it { should have_many(:schools) }
   it { should have_many(:companies) }
   it { should have_many(:websites) }
@@ -32,10 +34,12 @@ RSpec.describe LinkedinProfile, :type => :model do
   it { should accept_nested_attributes_for(:companies) }
   it { should accept_nested_attributes_for(:websites) }
 
-  it 'builds a profile from a link' do
-    VCR.use_cassette("cj-profile") do
-      profile = LinkedinProfile.build_from_link("https://www.linkedin.com/pub/cj-avilla/19/772/577")
-      expect(profile.first_name).to eq("CJ")
+  describe '::build_from_link' do
+    it 'builds a profile from a link' do
+      VCR.use_cassette("cj-profile") do
+        profile = LinkedinProfile.build_from_link("https://www.linkedin.com/pub/cj-avilla/19/772/577", "Advisor")
+        expect(profile.first_name).to eq("CJ")
+      end
     end
   end
 
