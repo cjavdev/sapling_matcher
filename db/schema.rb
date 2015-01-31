@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150131062846) do
+ActiveRecord::Schema.define(version: 20150131220949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 20150131062846) do
     t.string  "linkedin_company_url"
     t.string  "name"
     t.integer "linkedin_profile_id"
+    t.string  "url"
+    t.string  "website"
+    t.string  "industry"
+    t.string  "headquarters"
+    t.string  "company_size"
+    t.string  "founded"
+    t.string  "address"
   end
 
   add_index "companies", ["linkedin_profile_id"], name: "index_companies_on_linkedin_profile_id", using: :btree

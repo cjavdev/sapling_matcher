@@ -1,0 +1,27 @@
+<h1>Sapling Advisory Matcher</h1>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <input
+      type="text"
+      class="form-control huge"
+      placeholder="https://www.linkedin.com/pub..." />
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-lg btn-success">Match</button>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    Advisors
+    <div class="list-group">
+      <% @advisors.each do |advisor| %>
+      <div class="list-group-item">
+        <%= advisor.name %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
