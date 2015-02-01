@@ -28,3 +28,4 @@ end
 
 gem 'newrelic_rpm'
 gem 'thin'
+gem 'figaro'
