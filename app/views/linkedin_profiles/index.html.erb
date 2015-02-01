@@ -35,7 +35,7 @@
     <div class="list-group">
       <% @profiles.each do |person| %>
         <a href="<%= linkedin_profile_url(person) %>" class="list-group-item">
-          <%= person.first_name %>
+          <%= person.name %>
           <span class="badge"><%= person.client_type %></span>
         </a>
       <% end %>

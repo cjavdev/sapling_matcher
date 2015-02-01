@@ -34,6 +34,14 @@ class LinkedinProfile < ActiveRecord::Base
   accepts_nested_attributes_for :companies
   accepts_nested_attributes_for :websites
 
+  def matches
+    if client_type == "Advisor"
+      potential_client_profile_matches
+    else
+      advisor_profile_matches
+    end
+  end
+
   def self.build_from_link(link, client_type)
     profile = LinkedinProfile.new(link: link, client_type: client_type)
     profile.fetch
@@ -59,16 +67,19 @@ class LinkedinProfile < ActiveRecord::Base
   end
 
   def set_schools
+    self.schools = []
     update(schools_attributes: scraped_profile.education)
   end
 
   def set_companies
+    self.companies = []
     cos = current_companies + past_companies
     cos = cos.map { |c| c.delete(:type); c }
     update(companies_attributes: cos)
   end
 
   def set_websites
+    self.websites = []
     sites = scraped_profile.websites.map do |site|
       { name: site }
     end

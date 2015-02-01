@@ -1,8 +1,14 @@
-
 <div class="row">
   <div class="col-md-6">
     <h1><%= @profile.name %></h1>
+    <form action="<%= linkedin_profile_url(@profile) %>" method="post">
+      <input type="hidden" name="authenticity_token" id="" value="<%= form_authenticity_token %>" />
+      <input type="hidden" name="_method" id="" value="PATCH" />
+      <button class="btn btn-success btn-sm">Refetch!</button>
+    </form>
     <p><%= @profile.summary %></p>
+
+    <h3> Schools </h3>
     <ul class="schools list-group">
       <% @profile.schools.each do |school| %>
         <li class="list-group-item">
@@ -11,8 +17,37 @@
         </li>
       <% end %>
     </ul>
+
+    <h3> Companies </h3>
+    <ul class="list-group">
+      <% @profile.companies.each do |company| %>
+        <li class="list-group-item">
+          <strong><%= company.company %></strong>
+          <%= company.title %>
+        </li>
+      <% end %>
+    </ul>
   </div>
   <div class="col-md-6">
     <h2>Matches</h2>
+    <form action="<%= linkedin_profile_profile_matches_url(@profile) %>" method="post">
+      <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+      <button class="btn btn-success">Generate</button>
+    </form>
+    <%= link_to "Add Profile", linkedin_profiles_url %>
+    <ul class="schools list-group">
+      <% @matches.each do |match| %>
+        <% if @profile.advisor? %>
+          <li class="list-group-item">
+            <strong><%= match.potential_client_profile.name %></strong>
+          </li>
+        <% else %>
+          <li class="list-group-item">
+            <strong><%= match.advisor_profile.name %></strong>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+
   </div>
 </div>

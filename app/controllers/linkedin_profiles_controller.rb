@@ -5,6 +5,7 @@ class LinkedinProfilesController < ApplicationController
 
   def show
     @profile = LinkedinProfile.find(params[:id])
+    @matches = @profile.matches
   end
 
   def new
@@ -18,6 +19,7 @@ class LinkedinProfilesController < ApplicationController
     @profile = LinkedinProfile.find(params[:id])
 
     if @profile.update(profile_params)
+      @profile.fetch
       redirect_to @profile
     else
       render :edit
@@ -35,5 +37,11 @@ class LinkedinProfilesController < ApplicationController
     else
       render :new
     end
+  end
+
+  private
+
+  def profile_params
+    {}
   end
 end

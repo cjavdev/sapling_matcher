@@ -12,6 +12,7 @@
 #
 
 class ProfileMatch < ActiveRecord::Base
+  validates :advisor_profile_id, uniqueness: { scope: :potential_client_profile_id }
   belongs_to :advisor_profile, class_name: 'LinkedinProfile'
   belongs_to :potential_client_profile, class_name: 'LinkedinProfile'
 end
