@@ -21,6 +21,10 @@
 #  address              :string
 #
 
-class Company < ActiveRecord::Base
-  belongs_to :linkedin_profile
+FactoryGirl.define do
+  factory :company do
+    sequence :name do |n|
+      "company_#{ n }"
+    end
+  end
 end

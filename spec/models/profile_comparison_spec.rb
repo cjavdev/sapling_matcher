@@ -36,4 +36,24 @@ RSpec.describe ProfileComparison do
       expect(comp.common_location?).to eq(false)
     end
   end
+
+  describe '#common_company?' do
+    it 'returns true if there is a common company' do
+      aapl = create(:company, name: "AAPL")
+      aapl2 = create(:company, name: "AAPL")
+      a = create(:linkedin_profile, companies: [aapl])
+      b = create(:linkedin_profile, companies: [aapl2])
+      comp = ProfileComparison.new(a, b)
+      expect(comp.common_company?).to eq(true)
+    end
+
+    it 'returns false if the locations are different' do
+      aapl = create(:company, name: "AAPL")
+      goog = create(:company, name: "GOOG")
+      a = create(:linkedin_profile, companies: [aapl])
+      b = create(:linkedin_profile, companies: [goog])
+      comp = ProfileComparison.new(a, b)
+      expect(comp.common_company?).to eq(false)
+    end
+  end
 end

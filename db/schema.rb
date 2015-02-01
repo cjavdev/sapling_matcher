@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150131220949) do
+ActiveRecord::Schema.define(version: 20150201033534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 20150131220949) do
   end
 
   add_index "linkedin_profiles", ["link"], name: "index_linkedin_profiles_on_link", using: :btree
+
+  create_table "profile_matches", force: :cascade do |t|
+    t.integer  "advisor_profile_id"
+    t.integer  "potential_client_profile_id"
+    t.boolean  "school",                      default: false
+    t.boolean  "location",                    default: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.boolean  "company",                     default: false
+  end
 
   create_table "schools", force: :cascade do |t|
     t.string  "name"

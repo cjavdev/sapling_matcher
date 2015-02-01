@@ -26,6 +26,10 @@ class LinkedinProfile < ActiveRecord::Base
   has_many :schools
   has_many :websites
   has_many :companies
+  has_many :advisor_profile_matches, class_name: 'ProfileMatch', foreign_key: :potential_client_profile_id
+  has_many :potential_client_profile_matches, class_name: 'ProfileMatch', foreign_key: :advisor_profile_id
+  has_many :matched_advisors, through: :advisor_profile_matches, source: :advisor_profile
+  has_many :matched_potential_clients, through: :potential_client_profile_matches, source: :potential_client_profile
   accepts_nested_attributes_for :schools
   accepts_nested_attributes_for :companies
   accepts_nested_attributes_for :websites

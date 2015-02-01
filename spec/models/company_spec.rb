@@ -12,6 +12,13 @@
 #  linkedin_company_url :string
 #  name                 :string
 #  linkedin_profile_id  :integer
+#  url                  :string
+#  website              :string
+#  industry             :string
+#  headquarters         :string
+#  company_size         :string
+#  founded              :string
+#  address              :string
 #
 
 require 'rails_helper'

@@ -30,6 +30,10 @@ RSpec.describe LinkedinProfile, :type => :model do
   it { should have_many(:schools) }
   it { should have_many(:companies) }
   it { should have_many(:websites) }
+  it { should have_many(:advisor_profile_matches) }
+  it { should have_many(:potential_client_profile_matches) }
+  it { should have_many(:matched_advisors) }
+  it { should have_many(:matched_potential_clients) }
   it { should accept_nested_attributes_for(:schools) }
   it { should accept_nested_attributes_for(:companies) }
   it { should accept_nested_attributes_for(:websites) }

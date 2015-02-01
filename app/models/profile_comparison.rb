@@ -13,4 +13,8 @@ class ProfileComparison
   def common_location?
     profile1.location == profile2.location
   end
+
+  def common_company?
+    (profile1.companies.pluck(:name) & profile2.companies.pluck(:name)).any?
+  end
 end
