@@ -24,3 +24,5 @@ group :test do
   gem 'vcr'
   gem 'webmock'
 end
+
+gem 'newrelic_rpm'
