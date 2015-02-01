@@ -34,8 +34,12 @@ class LinkedinProfile < ActiveRecord::Base
   accepts_nested_attributes_for :companies
   accepts_nested_attributes_for :websites
 
+  def advisor?
+    client_type == "Advisor"
+  end
+
   def matches
-    if client_type == "Advisor"
+    if advisor?
       potential_client_profile_matches
     else
       advisor_profile_matches

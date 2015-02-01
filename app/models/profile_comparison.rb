@@ -15,6 +15,6 @@ class ProfileComparison
   end
 
   def common_company?
-    (profile1.companies.pluck(:name) & profile2.companies.pluck(:name)).any?
+    (profile1.companies.pluck(:company) & profile2.companies.pluck(:company)).any?
   end
 end

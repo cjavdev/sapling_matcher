@@ -1,11 +1,17 @@
 <div class="row">
   <div class="col-md-6">
     <h1><%= @profile.name %></h1>
+    <p><i class="fa fa-map-marker"></i> <%= @profile.location %></p>
+
     <form action="<%= linkedin_profile_url(@profile) %>" method="post">
       <input type="hidden" name="authenticity_token" id="" value="<%= form_authenticity_token %>" />
       <input type="hidden" name="_method" id="" value="PATCH" />
-      <button class="btn btn-success btn-sm">Refetch!</button>
+      <button class="btn btn-success btn-sm">
+        <i class="fa fa-refresh"></i>
+        Refetch!
+      </button>
     </form>
+
     <p><%= @profile.summary %></p>
 
     <h3> Schools </h3>
@@ -32,22 +38,32 @@
     <h2>Matches</h2>
     <form action="<%= linkedin_profile_profile_matches_url(@profile) %>" method="post">
       <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-      <button class="btn btn-success">Generate</button>
+      <div class="form-group">
+        <button class="btn btn-success">
+          <i class="fa fa-refresh"></i>
+          Generate
+        </button>
+      </div>
     </form>
-    <%= link_to "Add Profile", linkedin_profiles_url %>
     <ul class="schools list-group">
       <% @matches.each do |match| %>
-        <% if @profile.advisor? %>
-          <li class="list-group-item">
+        <li class="list-group-item">
+          <% if @profile.advisor? %>
             <strong><%= match.potential_client_profile.name %></strong>
-          </li>
-        <% else %>
-          <li class="list-group-item">
+          <% else %>
             <strong><%= match.advisor_profile.name %></strong>
-          </li>
-        <% end %>
+          <% end %>
+          <% if match.school %>
+            <i class="pull-right fa fa-graduation-cap"></i>
+          <% end %>
+          <% if match.location %>
+            <i class="pull-right fa fa-map-marker"></i>
+          <% end %>
+          <% if match.company %>
+            <i class="pull-right fa fa-building"></i>
+          <% end %>
+        </li>
       <% end %>
     </ul>
-
   </div>
 </div>
