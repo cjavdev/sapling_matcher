@@ -46,6 +46,61 @@ class LinkedinProfile < ActiveRecord::Base
     end
   end
 
+  def matches_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << [
+          "Advisor",
+          "PotentialClient",
+          "Qualifying Trigger",
+          "Other Notes",
+          "Title",
+          "Company",
+          "Business Address",
+          "Email",
+          "Phone",
+          "LinkedIn",
+          "City Match",
+          "Education Match",
+          "Employment Match",
+      ]
+      matches.each do |match|
+        if advisor?
+          csv << [
+            name,
+            match.potential_client_profile.name,
+            '',
+            '',
+            match.potential_client_profile.title,
+            match.potential_client_profile.companies.where(current: true).first.company,
+            '',
+            '',
+            '',
+            match.potential_client_profile.link,
+            match.location ? "Yes" : "No",
+            match.school ? "Yes" : "No",
+            match.company ? "Yes" : "No",
+          ]
+        else
+          csv << [
+            name,
+            match.advisor_profile.name,
+            '',
+            '',
+            match.potential_client_profile.title,
+            match.potential_client_profile.companies.where(current: true).first.company,
+            '',
+            '',
+            '',
+            match.potential_client_profile.link,
+            match.location ? "Yes" : "No",
+            match.school ? "Yes" : "No",
+            match.company ? "Yes" : "No",
+          ]
+        end
+      end
+    end
+  end
+
   def self.build_from_link(link, client_type)
     profile = LinkedinProfile.new(link: link, client_type: client_type)
     profile.fetch

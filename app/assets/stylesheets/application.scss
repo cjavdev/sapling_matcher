@@ -22,3 +22,20 @@
   font-size: 2em;
   height: 2em;
 }
+
+.img-medium {
+  max-width: 80px;
+}
+
+.img-show {
+  float: left;
+  margin: 15px;
+}
+
+.show-header {
+  clear: both;
+  display: inline-block;
+  .show-header-title, .show-header-img {
+    float: left;
+  }
+}

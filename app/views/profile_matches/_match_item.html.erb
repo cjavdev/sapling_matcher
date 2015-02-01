@@ -1,0 +1,13 @@
+<a href="<%= linkedin_profile_url(profile) %>" class="list-group-item">
+  <strong><%= profile.name %></strong>
+  <% if match.school %>
+    <i class="pull-right fa fa-graduation-cap"></i>
+  <% end %>
+  <% if match.location %>
+    <i class="pull-right fa fa-map-marker"></i>
+  <% end %>
+  <% if match.company %>
+    <i class="pull-right fa fa-building"></i>
+  <% end %>
+</a>
+
