@@ -1,4 +1,5 @@
 <a href="<%= linkedin_profile_url(profile) %>" class="list-group-item">
+  <img src="<%= profile.picture %>" class="img-circle img-small">
   <strong><%= profile.name %></strong>
   <% if match.school %>
     <i class="pull-right fa fa-graduation-cap"></i>
