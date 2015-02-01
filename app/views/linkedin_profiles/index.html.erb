@@ -10,6 +10,7 @@
         type="text"
         class="form-control huge"
         name="link"
+        id="link"
         placeholder="https://www.linkedin.com/pub..." />
       </div>
 
@@ -42,3 +43,15 @@
     </div>
   </div>
 </div>
+
+<script>
+  $(function () {
+    $('#link').on('change', function (event) {
+      var link = $(event.currentTarget).val();
+      if(!link.startsWith("http")) {
+        link = "http://" + link;
+      }
+      $('#link').val(link);
+    });
+  });
+</script>
